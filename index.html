@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Baseball Data</title>
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:700|Roboto:400,400i" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+</head>
+<body>
+  <h1>Baseball Data</h1>
+  <div id="hand-barplot" class="story-text">
+    <h2>Handedness in Baseball</h2>
+    <p>This graph shows which hands players use while batting.</p>
+    <div class="plot-container">
+    </div>
+
+  </div>
+  <div id="avg-boxplot" class="story-text">
+    <h2>Batting Average and Handedness</h2>
+    <p>This graph shows whether handedness affects the average of batters.</p>
+      <br>
+      Left-handed players have less variability in their batting average. However,
+      the two highest performers are left-handed.
+    </p>
+    <div class="plot-container">
+    </div>
+  </div>
+  <div id="HR-boxplot" class="story-text">
+    <h2>Home Runs by Handedness</h2>
+    <p>This graph shows the number of homeruns by handedness.
+      <br>
+      Left-handed players have a median number of home runs
+      higher than the other players.
+    </p>
+    <div class="plot-container">
+    </div>
+  </div>
+  <script src="js/create_barplot.js"></script>
+  <script src="js/d3-tip.js"></script>
+  <script src="js/create_boxplot.js"></script>
+  <script>
+  d3.csv("data/baseball_data.csv", function(d){
+    return{
+      "name": d.name,
+      "handedness": d.handedness,
+      "height": +d.height,
+      "weight": +d.weight,
+      "avg": +d.avg,
+      "HR": +d.HR
+    };
+  },function(data){
+    drawBarPlot(data);
+    drawBoxPlot(data, "avg");
+    drawBoxPlot(data, "HR");
+
+  });
+  </script>
+</body>
+</html>
